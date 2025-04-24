@@ -1,0 +1,68 @@
+====================================== ASSIGNMENT 1A ======================================
+
+=== BACKGROUND ===
+
+We have received a new job and client has required for the detection of corrosion in underwater piles. You are given a new sensor to collect the required data and is required to write a driver to interface the sensor. The sensor can operate in 3 modes listed below. User should be able to collect data in all 3 modes.
+
+=== SENSOR MODES ===
+
+1. Stabbing measurement
+	Method: Sensor is required to directly stabbed into a metal structure to obtain the value.
+	Value: Return average of [Ref1] and [Ref2]
+
+2. Proximity measurement
+	Method: Sensor has to do an initial stab on the structure to collect the freeze value. After which the sensor will be moved around in close proximity to obtain the value.
+	Value: 
+	Step 1 is to perform a stab and "freeze" (store) the value of [Ref1] and [Ref2], let's call it [Frz1] and [Frz2]. 
+	Step 2 is to move around the anode (without stabbing this time) and take proximity measurements. 
+	Return average of [Frz1 - Rem1] and [Frz2 - Rem2]. 
+	Both [Frz1 - Rem1] and [Frz2 - Rem2] should be the similar.
+
+3. Field Gradient measurement
+	Method: Sensor to be moved around structure
+	Value: Return [Delta] directly
+
+=== LOG FILE ===
+
+Only $CPP is required, $FH is not required to be processed.
+$CPP, Ref1, Ref2, Delta, Rem1, Rem2
+
+
+=== TECHNICAL REQUIREMENTS ===
+1. ROS1
+2. C++
+3. Driver to read log file through a serial port.
+    - You are recommended to create a virtual serial port (e.g. using socat), dump the log file provided into the port and get the driver to read from the port.
+    - You may write a script to help you dump the log file continuously.
+4. Service to change sensor mode
+5. Service to freeze value for Mode 2
+6. Topic to output final value depending on mode
+7. Write a complete README on how to compile and use
+8. For submission, please zip and send all necessary files.
+9. You will also be graded on how well your code structure is.
+
+
+
+
+
+====================================== ASSIGNMENT 1B ======================================
+
+=== BACKGROUND ===
+
+We now have 3 of such sensors (in Assignment 1A) and might be required to run all sensors simultaneously. 
+However, this might not always be the case and it would be redundant to always run both drivers. 
+You are now required to write a node to manage the launching and killing of the driver from Assignment 1A.
+
+=== USER REQUIREMENTS ===
+
+1. Node to launch up to 3 drivers upon request
+2. Node to kill independent driver upon request
+
+=== TECHNICAL REQUIREMENTS ===
+1. ROS1
+2. C++
+3. Service to launch or kill individual driver
+4. Each driver is expected to be connected to a different serial port
+5. All drivers launched needs to run in parallel (one driver crashing should not affect the other)
+6. Write a complete README on how to compile and use
+7. For submission, please zip and send all necessary files.
